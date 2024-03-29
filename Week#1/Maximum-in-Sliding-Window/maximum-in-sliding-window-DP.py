@@ -8,7 +8,7 @@ def max_sliding_window(sequence, m, n):
 
     for i in range(n - 2, -1, -1): # ітеруємось реверсом від n - 2 до 0
         r = i + 1 # номер наступного (правого) елемента.
-        while (r < n and sequence[r] <= sequence[i]): # поки r лежить у межах масиву та правіший елемент масиву sequence
+        while r < n and sequence[r] <= sequence[i]: # поки r лежить у межах масиву та правіший елемент масиву sequence
                                                         # менший за поточний елемент
             r = right[r] # перевизначаємо номер наступного (правіше) ще більшого елемента масиву sequence
         right[i] = r # присвоюємо і-му елементу масиву right значення r
