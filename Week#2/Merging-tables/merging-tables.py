@@ -1,14 +1,14 @@
 class Database:
     def __init__(self, row_counts):
-        self.row_counts = row_counts
+        self._row_counts = row_counts
         self.max_row_count = max(row_counts)
         n_tables = len(row_counts)
-        self.ranks = [1] * n_tables
-        self.parents = list(range(n_tables))
+        self._ranks = [1] * n_tables
+        self._parents = list(range(n_tables))
 
     def merge(self, src, dst):
-        src_parent = self.get_parent(src)
-        dst_parent = self.get_parent(dst)
+        src_parent = self._get_parent(src)
+        dst_parent = self._get_parent(dst)
 
         if src_parent == dst_parent:
             return False
@@ -16,27 +16,27 @@ class Database:
         # merge two components
         # use union by rank heuristic
         # update max_row_count with the new maximum table size
-        if self.ranks[src_parent] > self.ranks[dst_parent]:
-            self.parents[dst_parent] = src_parent
-            self.row_counts[src_parent] += self.row_counts[dst_parent]
-            self.row_counts[dst_parent] = 0
-            self.max_row_count = max(self.max_row_count, self.row_counts[src_parent])
+        if self._ranks[src_parent] > self._ranks[dst_parent]:
+            self._parents[dst_parent] = src_parent
+            self._row_counts[src_parent] += self._row_counts[dst_parent]
+            self._row_counts[dst_parent] = 0
+            self.max_row_count = max(self.max_row_count, self._row_counts[src_parent])
         else:
-            self.parents[src_parent] = dst_parent
-            self.row_counts[dst_parent] += self.row_counts[src_parent]
-            self.row_counts[src_parent] = 0
-            self.max_row_count = max(self.max_row_count, self.row_counts[dst_parent])
-            if self.ranks[src_parent] == self.ranks[dst_parent]:
-                self.ranks[dst_parent] += 1
+            self._parents[src_parent] = dst_parent
+            self._row_counts[dst_parent] += self._row_counts[src_parent]
+            self._row_counts[src_parent] = 0
+            self.max_row_count = max(self.max_row_count, self._row_counts[dst_parent])
+            if self._ranks[src_parent] == self._ranks[dst_parent]:
+                self._ranks[dst_parent] += 1
 
         return True
 
-    def get_parent(self, table):
+    def _get_parent(self, table):
         # find parent and compress path
-        if table != self.parents[table]:
+        if table != self._parents[table]:
             # table = self.parents[table]
-            self.parents[table] = self.get_parent(self.parents[table])
-        return self.parents[table]
+            self._parents[table] = self._get_parent(self._parents[table])
+        return self._parents[table]
 
 
 def main():
