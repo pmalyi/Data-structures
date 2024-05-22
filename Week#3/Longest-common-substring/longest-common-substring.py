@@ -8,7 +8,7 @@ def PolyHash(s, prime, multiplier):
 
 
 def HashTable(s, p_len, prime, multiplier):
-    H = list([] for _ in range(len(s) - p_len + 1))
+    H = [0] * (len(s) - p_len + 1)
     substring = s[len(s) - p_len:]
     H[len(s) - p_len] = PolyHash(substring, prime, multiplier)
     y = pow(multiplier, p_len, prime)
