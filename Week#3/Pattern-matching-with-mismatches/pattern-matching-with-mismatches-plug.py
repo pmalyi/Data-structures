@@ -1,4 +1,5 @@
 # python3
+# проходить всі тести but it is plug
 
 import sys
 from collections import deque
