@@ -34,7 +34,6 @@ def find_approximate_matches(k, t, p):
         low, high = 0, n
         mismatches = 0
         max_low = 0
-
         while low < high and mismatches <= k:
             mid = (low + high) // 2
             t_hash = get_substring_hash(t_hashes, t_powers, start, mid, mod)

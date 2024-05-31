@@ -1,17 +1,13 @@
-# без хешування, але проходить всі тести
+# без хешування, але проходить всі тести швидше ніж pattern-matching-with-mismatches-recurs.py
 def mismatch_count(t, p, res, k):
+    if len(t) == 1 and t != p:
+        res[0] += 1
     if res[0] > k or t == p or len(t) < 2:
-        return t, p
-
+        return
     mid = len(t) // 2
-    left_t, left_p = mismatch_count(t[:mid], p[:mid], res, k)
-    right_t, right_p = mismatch_count(t[mid:], p[mid:], res, k)
-    if len(left_t) == 1 and left_t != left_p:
-        res[0] += 1
-    if len(right_t) == 1 and right_t != right_p:
-        res[0] += 1
-
-    return t, p
+    mismatch_count(t[:mid], p[:mid], res, k)
+    mismatch_count(t[mid:], p[mid:], res, k)
+    return
 
 
 def find_approximate_matches(t, p, k):
@@ -50,7 +46,7 @@ if __name__ == "__main__":
     results = process_input(input_lines)
     for result in results:
         print(result)
-        #print(result, file=fileout)
+        # print(result, file=fileout)
 
     # filein.close()
     # fileout.close()
