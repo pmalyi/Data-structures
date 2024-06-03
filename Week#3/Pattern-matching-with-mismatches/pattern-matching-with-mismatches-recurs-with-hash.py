@@ -1,4 +1,6 @@
-# з хешуванням. не проходить всі тести: Failed case #6/7: time limit exceeded (Time used: 45.35/40.00, memory used: 33202176/536870912.)
+# з хешуванням.
+# не проходить всі тести:
+# Failed case #6/7: time limit exceeded (Time used: 45.35/40.00, memory used: 33202176/536870912.)
 def compute_hashes(s, base=263, mod=10 ** 9 + 7):
     n = len(s)
     hash_tab = [0] * (n + 1)
@@ -27,7 +29,7 @@ def mismatch_count(t_hash_tab, p_hash_tab, powers_tab, low, high, res, k):
     if high - low == 1 and t_hash_value != p_hash_value:
         res[0] += 1
 
-    if res[0] > k or t_hash_value == p_hash_value or high - low == 1:
+    if res[0] > k or t_hash_value == p_hash_value or high - low < 2:
         return
 
     mid = (low + high) // 2
@@ -65,16 +67,16 @@ def process_input(input_lines):
 
 
 if __name__ == "__main__":
-    #import sys
-    #input_lines = sys.stdin.read().strip().split('\n')
-    filein = open("cours_input.txt", "r")
+    import sys
+    input_lines = sys.stdin.read().strip().split('\n')
+    # filein = open("cours_input.txt", "r")
     # filein = open("test_input.txt", "r")
-    fileout = open("my_output-2.txt", "w")
-    input_lines = filein.read().strip().split('\n')
+    # fileout = open("my_output-2.txt", "w")
+    # input_lines = filein.read().strip().split('\n')
     results = process_input(input_lines)
     for result in results:
-        #print(result)
-        print(result, file=fileout)
+        print(result)
+        #print(result, file=fileout)
 
     # filein.close()
     # fileout.close()
