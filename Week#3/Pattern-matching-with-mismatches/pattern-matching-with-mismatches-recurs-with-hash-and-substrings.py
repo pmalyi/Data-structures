@@ -75,7 +75,6 @@ if __name__ == "__main__":
     import sys
     input_lines = sys.stdin.read().strip().split('\n')
     #filein = open("cours_input.txt", "r")
-    #filein = open("test_input.txt", "r")
     #fileout = open("my_output-2.txt", "w")
     #input_lines = filein.read().strip().split('\n')
     results = process_input(input_lines)
